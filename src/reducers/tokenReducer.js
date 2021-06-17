@@ -2,11 +2,6 @@ export const tokenReducer = (state, action) => {
   switch (action.type) {
     case "INIT":
       return { ...state, token: action.payload[0], ownBalance: action.payload[1] };
-    case 'LOADING':
-      return {...state, loading: action.payload};
-    case 'FINISH':
-      console.log(action.payload)
-      return {...state, loading: false};
     case "ERROR":
       return { ...state, loading: false, error: action.payload };
     case "SET_BALANCE":

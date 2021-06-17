@@ -62,7 +62,7 @@ const Approval = () => {
                 maxLength: { value: 42, message: "Please enter a valid address" },
             })}
           />
-          {errors.transfer && <AlertPop title={errors.transfer.message} />}
+          {errors.approveAddress && <AlertPop title={errors.approveAddress.message} />}
           <FormLabel>Amount</FormLabel>
             <NumberInput isRequired min={1} mb={4} >
               <NumberInputField {...register("amountApprove")}/>

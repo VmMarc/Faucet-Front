@@ -20,8 +20,6 @@ const Allowance = () => {
   const handleCheckAllowance = async (data) => {
     try {
       const allowance = await robinetToken.allowance(data.owner, data.sender);
-      console.log(ethers.utils.formatEther(allowance))
-      console.log(data)
       dispatch({ type: "SET_ALLOWANCE", payload: ethers.utils.formatEther(allowance) });
       toast({
         title: "Submitted!",
@@ -42,27 +40,27 @@ const Allowance = () => {
         <Input
           type="text"
           placeholder="Owner"
+          isRequired
           {...register("owner", {
-            required: "Please enter the owner address",
             minLength: { value: 42, message: "Please enter a valid address" },
             maxLength: { value: 42, message: "Please enter a valid address" },
           })}
         />
+        {errors.owner && <AlertPop title={errors.owner.message} />}
         <Input
           type="text"
           placeholder="Sender"
+          isRequired
           {...register("sender", {
-            required: "Please enter the sender address",
             minLength: { value: 42, message: "Please enter a valid address" },
             maxLength: { value: 42, message: "Please enter a valid address" },
           })}
         />
+        {errors.sender && <AlertPop title={errors.sender.message} />}
         <Button borderRadius="md" bg="cyan.600" _hover={{ bg: "cyan.200" }} variant="ghost" type="submit">
           👀
         </Button>
         <Text>{allowance}</Text>
-        {errors.owner && <AlertPop title={errors.owner.message} />}
-        {errors.sender && <AlertPop title={errors.sender.message} />}
       </VStack>
     </form>
   );
