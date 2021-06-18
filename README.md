@@ -1,72 +1,41 @@
-# Getting Started with Create React App
+[![built-with openzeppelin](https://img.shields.io/badge/built%20with-OpenZeppelin-3677FF)](https://docs.openzeppelin.com/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Exercice Faucet + ERC20 interface
 
-## Available Scripts
+Cet exercice est évalué et est à rendre avant le vendredi 18 juin 17h30 au plus tard.
 
-In the project directory, you can run:
+Cet exercice comprend la création d'un token ERC20, d'un smart contract de Faucet et d'une interface qui permettra de récupérer des tokens de tests et de pouvoir utiliser les fonctionnalités de base d'un ERC20.
 
-### `yarn start`
+Votre project React et votre projet Hardhat devront être accessibles depuis un repository github.
+Le formulaire de rendu: (<https://forms.gle/z8D3rFEXy9g6eV4D7>)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Smart contracts dans un projet hardat
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Votre projet devra contenir un smart contract de token ERC20 classique, ainsi qu'un smart contract pour un faucet décentralisé.
+Ce faucet permet l'envoi d'une quantité fixe de tokens possédés par une adresse qui est sous votre contrôle.
+Pour l'exercice je vous recommande de créer une nouvelle adresse et de partager la clef privée entre les membres de ce projet.
+Cette adresse peut aussi être l'adresse qui reçoit tous les tokens mintés au déploiement du token ERC20.
+Le smart contract Faucet effectuera un contrôle avant d'envoyer les tokens, la même adresse ne pourra effectuer une demande de tokens que tous les 3 jours.
+Une opération post déploiement pour l'approve du smart contract de Faucet par l'owner des tokens à transférer est nécéssaire, elle peut se faire manuellement via une interface (remix ou la votre) ou automatisé (préférable) dans vos scripts hardhat (plus d'informations sur cette méthode seront fournies sur discord).
+N'oubliez pas les tests unitaires!!
 
-### `yarn test`
+## interface utilisateurs dans un projet React
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Une interface web permettra à vos utilisateurs de:
 
-### `yarn build`
+1. Demander des tokens de test
+2. utiliser les fonctionnalités de base de votre ERC20
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Cette application devra être réactive aux events émis par vos smarts contracts!!.
+Elle pourra aussi afficher des informations importantes pour vos utilisateurs comme sa balance actuelle de tokens.
+Des inputs seront nécessaires, il faudra vérifier leur validité autant que possible coté React avant de les envoyer vers la Blockchain.
+Par exemple pour vérifier qu'une adresse entrée est correcte vous pouvez utiliser: <https://docs.ethers.io/v5/api/utils/address/#utils-isAddress>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+##installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-# faucet-dapp
+```
+git clone https://github.com/johnfr14/red-team-frontFaucet.git
+cd red-team-frontFaucet
+yarn
+yarn start
+```
