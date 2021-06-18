@@ -14,6 +14,8 @@ const Analytics = () => {
   const {register,handleSubmit,formState: { errors }} = useForm();
   const [robinetToken] = useContext(FaucetContext);
 
+  
+
   const handleCheckBalance = async (data) => {
     try {
       const newBalance = await robinetToken.balanceOf(data.account);

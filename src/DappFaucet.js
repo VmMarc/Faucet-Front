@@ -8,7 +8,7 @@ import { TokenContextProvider } from "./context/TokenContext";
 function DappFaucet() {
   return (
     <TokenContextProvider>
-      <Box height="100vh" direction="column" alignItems="center" justifyContent="center">
+      <Box height="90vh" direction="column" alignItems="center" justifyContent="center">
         <Login />
         <Faucet />
       </Box>

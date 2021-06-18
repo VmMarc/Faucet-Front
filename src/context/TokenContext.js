@@ -13,7 +13,7 @@ const initialState = {
   allowance: 0,
   error: "",
   loading: false,
-  timer: 0
+  timer: 0,
 }
 
 export const TokenContextProvider = ({children}) => {
