@@ -20,7 +20,7 @@ import { CircularProgress } from "@chakra-ui/react"
 import AlertPop from "./AlertPop";
 
 const TransfertFrom = () => {
-  const { dispatch, token} = useToken()
+  const { dispatch, token, error} = useToken()
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [web3State] = useContext(Web3Context);
   const [loading, setLoading] = useState(false)
@@ -43,6 +43,9 @@ const TransfertFrom = () => {
   const handleSubmitButton = async (data) => {
     const amount = ethers.utils.parseEther(data.amountFrom)
     try {
+      if(allowance.address.length !== 42){
+        throw new Error("the sender must be a valide address")
+      }
       setLoading(true)
       const tx = await robinetToken.transferFrom(allowance.address, data.transferTo, amount)
       await tx.wait()
@@ -86,6 +89,7 @@ const TransfertFrom = () => {
             })}/>
           {errors.transferTo && <AlertPop title={errors.transferTo.message} />}
           <Button type="submit" colorScheme="teal" variant="solid" w="50%" m={2} mb={3}>{loading ? (<><CircularProgress fontSize="15px" isIndeterminate size="30px" color="green.300" /><Spacer /><p>Sending...</p></>) : "Send"}</Button>
+          {error && <AlertPop title={error} />}
         </form>
       </Box>
     </>

@@ -12,15 +12,17 @@ const initialState = {
   balance: 0,
   allowance: 0,
   error: "",
-  loading: false
+  loading: false,
+  timer: 0
 }
 
 export const TokenContextProvider = ({children}) => {
 
-  const [robinetToken] = useContext(FaucetContext)
+  const [robinetToken, faucet] = useContext(FaucetContext)
   const [web3State] = useContext(Web3Context)
   const [state, dispatch] = useReducer(tokenReducer, initialState)
-  const { ownBalance, token, balance, allowance, error, loading } = state
+  const { ownBalance, token, balance, allowance, error, loading, timer } = state
+
    useEffect(() => { 
     async function fetchData() {
       if (web3State.isLogged) {
@@ -30,10 +32,13 @@ export const TokenContextProvider = ({children}) => {
           const decimals = await robinetToken.decimals()
           const totalSupply = await robinetToken.totalSupply() 
           const token = {name: nameToken, symbol: symbol, decimals: decimals, totalSupply: ethers.utils.formatEther(totalSupply)}
+          const timer = await faucet.timeLeft()
+          const balance = await robinetToken.balanceOf(web3State.account)
+          
 
           const ownBalance1 = await robinetToken.balanceOf(web3State.account) 
           const ownBalance = ethers.utils.formatEther(ownBalance1)
-          dispatch({type: 'INIT', payload: [token, ownBalance]})
+          dispatch({type: 'INIT', payload: [token, ownBalance, ethers.utils.formatEther(balance), timer.toString()]})
 
         } catch (e) {
           dispatch({type: 'ERROR', payload: e.message})
@@ -42,10 +47,11 @@ export const TokenContextProvider = ({children}) => {
     }
     fetchData()
     
-  },[web3State, robinetToken])
+  },[web3State, robinetToken, faucet])
+  console.log(timer)
 
   return (
-    <TokenContext.Provider value={{ ownBalance, token, balance, allowance, error, loading, dispatch}}>
+    <TokenContext.Provider value={{ ownBalance, token, balance, allowance, error, loading, timer, dispatch}}>
       {children}
     </TokenContext.Provider>
   )
