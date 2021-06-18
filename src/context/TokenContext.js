@@ -48,7 +48,6 @@ export const TokenContextProvider = ({children}) => {
     fetchData()
     
   },[web3State, robinetToken, faucet])
-  console.log(timer)
 
   return (
     <TokenContext.Provider value={{ ownBalance, token, balance, allowance, error, loading, timer, dispatch}}>

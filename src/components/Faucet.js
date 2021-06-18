@@ -66,7 +66,6 @@ function Faucet() {
                         <Button onClick={handleClaimToken} bg="green.400" size="lg" height="60px" width="300px">
                           Claim 100 RBN
                         </Button>
-                        {error && <p>{error}</p>}
                   </Flex>
               </TabPanel>
               {/* initially not mounted */}
