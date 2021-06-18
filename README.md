@@ -31,7 +31,7 @@ Elle pourra aussi afficher des informations importantes pour vos utilisateurs co
 Des inputs seront nécessaires, il faudra vérifier leur validité autant que possible coté React avant de les envoyer vers la Blockchain.
 Par exemple pour vérifier qu'une adresse entrée est correcte vous pouvez utiliser: <https://docs.ethers.io/v5/api/utils/address/#utils-isAddress>
 
-##installation
+## installation
 
 ```
 git clone https://github.com/johnfr14/red-team-frontFaucet.git
